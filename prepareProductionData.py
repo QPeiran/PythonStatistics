@@ -17,10 +17,12 @@ df = pd.DataFrame(data=None)   # df is the frame containing all raw data
 for KL in data:
     sLength = len(data[KL])
     KL_array = [KL for i in range(sLength)]
-    data[key]['kittingline'] = KL_array               #Meanwhile add a new column with the kitting line's name
+    data[KL]['kittingline'] = KL_array               #Meanwhile add a new column with the kitting line's name
     df = pd.concat([df,data[KL]], sort = False)
     #print(df)
-    #rename all the column index
+
+#rename all the column index
+df.columns = ['Barcode', 'Production Batch', 'Recipe and P', 'Timestamp', 'Date', 'Seq Code', 'Week', 'Team Leader', 'Replenisher', 'Pickers', 'Break Reasons', 'Missing Products', 'Kitting Line']
 
 
 #to delete duplicates and detect missing data
