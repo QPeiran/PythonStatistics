@@ -36,17 +36,24 @@ print(dup) # show duplicated tuples
 df = df.drop_duplicates(subset = None, keep='last') # kept 'last record' for a reason
 
 # detect missing data
-# 1.(after dropping duplicates) for every kitting line it has to contain batch code [1:4]
-# 2.for every production batch, it has to be a "Prodution Start" & a "Production Finish"
-# df1 = df.where(df['Kitting Line'] == 'KL1')
+
+# df1 = df.where(df['Kitting Line'] == 'KL1') // another option
 for KL in data:
-    df_new = df.loc[df['Kitting Line'] == KL]
+    df_new = df.loc[df['Kitting Line'] == KL] # df_new is the sliced raw data of "Kitting Line(KL) Name"
+    # 1.(after dropping duplicates) for every kitting line it has to contain batch code [1:4]
     i = pd.Categorical(df_new['Production Batch'])
     for j in range (1,5):
         if j not in i.categories:
-            print("Warning: %r , %s is not included" %(KL,j))
+            print("Warning: %r , production batch %s is not included" %(KL,j))
         else:
             print("%r production batch %s included" %(KL,j))
+    # 2.Slice the raw data by Kitting Line Name, then the tuple's squence must follow the tiem sequence. Find out the errors
+    #for k in range(len(df_new)):
+    print(df_new.iloc[3,3].total_seconds())
+
+
+
+
 
 #print to CSV
 #df.to_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv',index=False)
