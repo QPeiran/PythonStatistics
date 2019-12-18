@@ -26,15 +26,27 @@ df.columns = ['Barcode', 'Production Batch', 'Recipe and P', 'Timestamp', 'Date'
 
 """
 # find duplicate rows
-dup = df.duplicated() # return a Boolean series with True at the place of each duplicated rows except their first occurrence (default value of keep argument is ‘first’). Then pass this Boolean Series to [] operator of Dataframe to select the rows which are duplicate
+dup = df.duplicated() # return a Boolean series with "True" at the place of each duplicated rows except their first occurrence (default value of keep argument is ‘first’). Then pass this Boolean Series to [] operator of Dataframe to select the rows which are duplicate
 print(dup) 
 
 dup = df[df.duplicated()]
 print(dup) # show duplicated tuples
 """
-#  delete duplicates
-df = df.drop_duplicates(subset = None, keep='first')
-#  detect missing data
+# delete duplicates
+df = df.drop_duplicates(subset = None, keep='last') # kept 'last record' for a reason
+
+# detect missing data
+# 1.(after dropping duplicates) for every kitting line it has to contain batch code [1:4]
+# 2.for every production batch, it has to be a "Prodution Start" & a "Production Finish"
+# df1 = df.where(df['Kitting Line'] == 'KL1')
+for KL in data:
+    df_new = df.loc[df['Kitting Line'] == KL]
+    i = pd.Categorical(df_new['Production Batch'])
+    for j in range (1,5):
+        if j not in i.categories:
+            print("Warning: %r , %s is not included" %(KL,j))
+        else:
+            print("%r production batch %s included" %(KL,j))
 
 #print to CSV
-df.to_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv',index=False)
+#df.to_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv',index=False)
