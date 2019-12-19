@@ -59,5 +59,3 @@ for KL in data:
 
 #print to CSV
 df.to_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv',index=False)
-
-###########################################################################################Staged Raw Data###############################
