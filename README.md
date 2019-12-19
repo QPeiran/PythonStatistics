@@ -24,4 +24,8 @@ Step 2-1: df_event['Finish Time'] = df_staged['Timestamp and Date']
 
 Step 2-2: df_event['Activity'] is fully depended on df_staged['Barcode']
 
-Step 2-3: 
+Step 2-3: use the fisrt occured Recipe's name in the next to replace the NA
+        manully fill df_staged['Recipe Name'][0&1] as the 'recipe name'; 
+        reverse series/array data;
+        find the first vaild cell's index;
+        find the recipe name;
