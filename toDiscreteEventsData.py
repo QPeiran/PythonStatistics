@@ -22,6 +22,10 @@ def batchcode_dependency(batchcoded):
     }
     return switcher.get(batchcoded, '')
 
+def categorize_event_shift(timestamp):
+    
+    return 0
+
 staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
 #print(dataFrame['Team Leader'].describe())
 df = pd.DataFrame(columns=('Event_id', 'Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption')) #df is the event data frame
