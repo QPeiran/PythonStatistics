@@ -29,3 +29,7 @@ Step 2-3: use the fisrt occured Recipe's name in the next to replace the NA
         reverse series/array data;
         find the first vaild cell's index;
         find the recipe name;
+
+Step 2-3: fill in ['Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Kitting Line', 'Assembly Batch'] with full functional dependency rules &&/|| conditional dependencies rules
+
+Step 2-4: fill in ['Event Shift','Time Consumption'] by conditional dependencies rules
