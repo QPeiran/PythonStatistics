@@ -21,3 +21,7 @@ Transform timestamp data to event data, the new data frame should be:
 
 Step 2-1: df_event['Finish Time'] = df_staged['Timestamp and Date']
           df_event['Start Time'] = df_staged['Timestamp and Date'].(row_index + 1)
+
+Step 2-2: df_event['Activity'] is fully depended on df_staged['Barcode']
+
+Step 2-3: 
