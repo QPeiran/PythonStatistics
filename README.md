@@ -15,9 +15,9 @@ Finally, export in CSV as "raw data staging file"
 
 
 2.toDiscreteEventData.py:
-Transform timestampe data to event data, the new data frame should be:
+Transform timestamp data to event data, the new data frame should be:
 ['Event_id', 'Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption']
 
 
-
-Step 2-1: 
+Step 2-1: df_event['Finish Time'] = df_staged['Timestamp and Date']
+          df_event['Start Time'] = df_staged['Timestamp and Date'].(row_index + 1)
