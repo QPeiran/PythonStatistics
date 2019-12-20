@@ -36,9 +36,9 @@ def categorize_event_shift(timestamp):
     weekday = switcher.get(weekday_index,'')
     hour = pd.Timestamp(timestamp).hour
     if hour in range(6,13):
-        shift = 'Morning Shift'
+        shift = 'Morning'
     elif hour in range(14,22):
-        shift = 'Afternoon Shift'
+        shift = 'Afternoon'
     else:
         shift = 'Error'
     return weekday +' '+ shift
@@ -49,10 +49,16 @@ def time_consumption(timestamp1,timestamp2):
     InMin = pd.Timedelta(t2-t1).seconds/60.0
     return InMin
 
+def count_pickers(picker):
+    picker_array = picker.split(';')
+    counter = 0
+    for members in picker_array:
+        counter = counter + 1
+    return counter - 1
 
 staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
 #print(dataFrame['Team Leader'].describe())
-df = pd.DataFrame(columns=('Event_id', 'Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption')) #df is the event data frame
+df_final = pd.DataFrame(data=None) #df is the event data frame
 
 df_temp_raw = staged_df.loc[staged_df['Kitting Line'] == 'KL1']
 df_temp_event = pd.DataFrame(columns=('Event_id', 'Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption'))
@@ -71,6 +77,8 @@ for i in range (len(df_temp_raw)):
     df_temp_event['Assembly Batch'].loc[i+1] = batchcode_dependency(df_temp_raw['Production Batch'].loc[i])
     df_temp_event['Time Consumption'].loc[i] = time_consumption(df_temp_event['Start Time'].loc[i], df_temp_event['Finish Time'].loc[i])
     df_temp_event['Event Shift'].loc[i] = categorize_event_shift(df_temp_event['Finish Time'].loc[i])
+    df_temp_event['Team Leader'].loc[i] = df_temp_raw['Team Leader'].loc[i]
+    df_temp_event['Pickers Count'].loc[i] = count_pickers(df_temp_raw['Pickers'].loc[i])
 
 for j in range (3,len(df_temp_raw)):
     reversed_index = df_temp_raw['Recipe and P'][::-1].loc[j:].first_valid_index()

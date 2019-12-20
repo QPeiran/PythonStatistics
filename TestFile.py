@@ -66,7 +66,13 @@ t2 = pd.to_datetime(staged_df["Timestamp and Date"][2])
 weekday = pd.Timestamp(staged_df["Timestamp and Date"][1]).weekday()
 hour = pd.Timestamp(staged_df["Timestamp and Date"][1]).hour
 weekday_shift = categorize_event_shift(staged_df["Timestamp and Date"][2])
-
-
 InMin = pd.Timedelta(t2-t1).seconds/60.0
-print(weekday_shift)
+
+def count_pickers(picker):
+    picker_array = picker.split(';')
+    counter = 0
+    for members in picker_array:
+        counter = counter + 1
+    return counter-1
+
+print(count_pickers(staged_df["Pickers"][100]))

@@ -34,8 +34,9 @@ Step 2-3: fill in ['Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Asse
 
 Step 2-4: fill in ['Event Shift','Time Consumption'] by conditional functional dependencies rules
 
-Step 2-5: fill in ['Team Leader', 'Pickrs Cpunt'] by CFD. However, may require nomarlize late
+Step 2-5: fill in ['Team Leader', 'Pickers Count'] by CFD. However, may require nomarlize later
 
+Step 2-6: give each event an ID!
 
 #pd.Timestamp("timestamp aliked data") => return a "timestamp"
 #pd.Timedelta(t2-t1) => return the time difference between t1 and t2
