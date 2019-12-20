@@ -32,4 +32,10 @@ Step 2-3: use the fisrt occured Recipe's name in the next to replace the NA
 
 Step 2-3: fill in ['Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Kitting Line', 'Assembly Batch'] with full functional dependency rules &&/|| conditional dependencies rules
 
-Step 2-4: fill in ['Event Shift','Time Consumption'] by conditional dependencies rules
+Step 2-4: fill in ['Event Shift','Time Consumption'] by conditional functional dependencies rules
+
+Step 2-5: fill in ['Team Leader', 'Pickrs Cpunt'] by CFD. However, may require nomarlize late
+
+
+#pd.Timestamp("timestamp aliked data") => return a "timestamp"
+#pd.Timedelta(t2-t1) => return the time difference between t1 and t2

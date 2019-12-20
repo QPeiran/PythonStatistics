@@ -23,8 +23,32 @@ def batchcode_dependency(batchcoded):
     return switcher.get(batchcoded, '')
 
 def categorize_event_shift(timestamp):
-    
-    return 0
+    weekday_index = pd.Timestamp(timestamp).weekday()
+    switcher = {
+        0: 'Monday',
+        1: 'Tuesday',
+        2: 'Wednesday',
+        3: 'Thursday',
+        4: 'Friday',
+        5: 'Saturday',
+        6: 'Sunday'
+    }
+    weekday = switcher.get(weekday_index,'')
+    hour = pd.Timestamp(timestamp).hour
+    if hour in range(6,13):
+        shift = 'Morning Shift'
+    elif hour in range(14,22):
+        shift = 'Afternoon Shift'
+    else:
+        shift = 'Error'
+    return weekday +' '+ shift
+
+def time_consumption(timestamp1,timestamp2):
+    t1 = pd.to_datetime(timestamp1)
+    t2 = pd.to_datetime(timestamp2)
+    InMin = pd.Timedelta(t2-t1).seconds/60.0
+    return InMin
+
 
 staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
 #print(dataFrame['Team Leader'].describe())
@@ -45,6 +69,8 @@ for i in range (len(df_temp_raw)):
     df_temp_event['Missing Ingredients'].loc[i+1] = df_temp_raw['Missing Products'].loc[i]
     df_temp_event['Kitting Line'].loc[i+1] = df_temp_raw['Kitting Line'].loc[i]
     df_temp_event['Assembly Batch'].loc[i+1] = batchcode_dependency(df_temp_raw['Production Batch'].loc[i])
+    df_temp_event['Time Consumption'].loc[i] = time_consumption(df_temp_event['Start Time'].loc[i], df_temp_event['Finish Time'].loc[i])
+    df_temp_event['Event Shift'].loc[i] = categorize_event_shift(df_temp_event['Finish Time'].loc[i])
 
 for j in range (3,len(df_temp_raw)):
     reversed_index = df_temp_raw['Recipe and P'][::-1].loc[j:].first_valid_index()
