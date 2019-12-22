@@ -60,8 +60,6 @@ staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
 #print(dataFrame['Team Leader'].describe())
 df_final = pd.DataFrame(data=None) #df is the event data frame
 
-df_temp_raw = staged_df.loc[staged_df['Kitting Line'] == 'KL4']
-
 
 def main(df_temp_raw):
     df_temp_event = pd.DataFrame(columns=('Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption'))
@@ -83,12 +81,21 @@ def main(df_temp_raw):
         df_temp_event['Event Shift'].loc[index_align+i] = categorize_event_shift(df_temp_event['Finish Time'].loc[index_align+i])
         df_temp_event['Team Leader'].loc[index_align+i] = df_temp_raw['Team Leader'].loc[index_align+i]
         df_temp_event['Pickers Count'].loc[index_align+i] = count_pickers(df_temp_raw['Pickers'].loc[index_align+i])
-        #return 0
        
     for j in range (3,len(df_temp_raw)):
         reversed_index = df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):].first_valid_index()
         df_temp_event['Recipe Name'].loc[reversed_index + j] = df_temp_raw['Recipe and P'].loc[reversed_index]
     #print(df_temp_raw['Recipe and P'].loc[reversed_index])
-    print(df_temp_event)
-    
-main(df_temp_raw)
+    #print(df_temp_event)
+    return df_temp_event
+
+for kl in range(1,9):
+    df_temp_raw = staged_df.loc[staged_df['Kitting Line'] == 'KL%s'%kl]
+    #print(df_temp_raw)
+    seg = main(df_temp_raw)
+    #print(seg)
+    df_final = pd.concat([df_final, seg], sort = False)
+
+df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\W51prepared.csv')
+
+

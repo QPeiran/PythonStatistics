@@ -36,7 +36,9 @@ Step 2-4: fill in ['Event Shift','Time Consumption'] by conditional functional d
 
 Step 2-5: fill in ['Team Leader', 'Pickers Count'] by CFD. However, may require nomarlize later
 
-Step 2-6: give each event an ID!
+Step 2-6: give each event an ID
+
+Step 2-7: loop out the final data for analysis as "prepared data"
 
 #pd.Timestamp("timestamp aliked data") => return a "timestamp"
 #pd.Timedelta(t2-t1) => return the time difference between t1 and t2
