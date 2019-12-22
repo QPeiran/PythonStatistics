@@ -56,7 +56,7 @@ def count_pickers(picker):
         counter = counter + 1
     return counter - 1
 
-staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
+staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged')  # Can change file path here
 #print(dataFrame['Team Leader'].describe())
 df_final = pd.DataFrame(data=None) #df is the event data frame
 
@@ -96,6 +96,6 @@ for kl in range(1,9):
     #print(seg)
     df_final = pd.concat([df_final, seg], sort = False)
 
-df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\W51prepared.csv')
+df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared') # Can change file path here
 
 

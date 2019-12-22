@@ -4,7 +4,7 @@ import datetime as dt
 
 # read file into data frame
 data = {}
-with pd.ExcelFile(r'C:\Users\Peiran Quan\Desktop\W51.xlsx') as xlsx:
+with pd.ExcelFile(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\raw.xlsx') as xlsx: #Change the file path here
     data['KL1'] = pd.read_excel(xlsx,'Kit line 1',index_col = None,na_values='NA')
     data['KL2'] = pd.read_excel(xlsx,'Kit line 2',index_col = None,na_values='NA')#, skiprows=1)
     data['KL3'] = pd.read_excel(xlsx,'Kit line 3',index_col = None,na_values='NA')
@@ -58,4 +58,4 @@ for KL in data:
     #for k in range(len(df_new)):
 
 #print to CSV
-df.to_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv',index=False)
+df.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv',index=False) #Can change the file path here
