@@ -37,7 +37,7 @@ def categorize_event_shift(timestamp):
     hour = pd.Timestamp(timestamp).hour
     if hour in range(6,13):
         shift = 'Morning'
-    elif hour in range(14,22):
+    elif hour in range(13,22):
         shift = 'Afternoon'
     else:
         shift = 'Error'
