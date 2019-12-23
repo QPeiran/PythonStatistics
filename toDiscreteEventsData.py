@@ -56,17 +56,17 @@ def count_pickers(picker):
         counter = counter + 1
     return counter - 1
 
-staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged')  # Can change file path here
+staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv')  # Can change file path here
 #print(dataFrame['Team Leader'].describe())
 df_final = pd.DataFrame(data=None) #df is the event data frame
 
 
 def main(df_temp_raw):
-    df_temp_event = pd.DataFrame(columns=('Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption'))
+    df_temp_event = pd.DataFrame(columns=('Start Time', 'Finish Time', 'Activity', 'Seq Code' ,'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption'))
     index_align = df_temp_raw.first_valid_index() # pandas is using the df_temp_raw's frame index whenever df_temp_raw is called
     df_temp_event['Finish Time'] = df_temp_raw['Timestamp and Date']
+    df_temp_event['Seq Code'] = df_temp_raw['Seq Code']
     df_temp_event['Start Time'][index_align] = '2019-1-1 00:00:00'
-    df_temp_event['Recipe Name'][1:3] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
     #df_temp_event['Recipe Name'][1] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
     #print(df_temp_event)
     
@@ -81,11 +81,17 @@ def main(df_temp_raw):
         df_temp_event['Event Shift'].loc[index_align+i] = categorize_event_shift(df_temp_event['Finish Time'].loc[index_align+i])
         df_temp_event['Team Leader'].loc[index_align+i] = df_temp_raw['Team Leader'].loc[index_align+i]
         df_temp_event['Pickers Count'].loc[index_align+i] = count_pickers(df_temp_raw['Pickers'].loc[index_align+i])
-       
-    for j in range (3,len(df_temp_raw)):
-        reversed_index = df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):].first_valid_index()
-        df_temp_event['Recipe Name'].loc[reversed_index + j] = df_temp_raw['Recipe and P'].loc[reversed_index]
-    #print(df_temp_raw['Recipe and P'].loc[reversed_index])
+        #print(df_temp_event)
+        """
+        for j in range (len(df_temp_raw)):  #############################################
+            print(df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):])
+            reversed_index = df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):].first_valid_index()
+        """
+        df_temp_raw['Recipe and P'][index_align] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
+        recipe_index = df_temp_raw['Recipe and P'].loc[0:index_align+i].last_valid_index()
+        #print(recipe_index)
+        df_temp_event['Recipe Name'].loc[index_align+i] = df_temp_raw['Recipe and P'].loc[recipe_index]
+        #print(df_temp_raw['Recipe and P'].loc[recipe_index])
     #print(df_temp_event)
     return df_temp_event
 
@@ -96,6 +102,5 @@ for kl in range(1,9):
     #print(seg)
     df_final = pd.concat([df_final, seg], sort = False)
 
-df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared') # Can change file path here
-
-
+df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared.csv') # Can change file path here
+print("Completed!")
