@@ -34,6 +34,8 @@ BSFrame = df.loc[df['Barcode'] == 'Break Start']
 BSFrame_sorted = BSFrame.sort_values(['Date','Timestamp'], ascending = [False,False])
 print(BSFrame_sorted)
 """
+
+"""
 def categorize_event_shift(timestamp):
     weekday_index = pd.Timestamp(timestamp).weekday()
     switcher = {
@@ -55,9 +57,10 @@ def categorize_event_shift(timestamp):
         shift = 'Error'
     return weekday +' '+ shift
 
+"""
 
-
-staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
+#staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\W51staged.csv')
+"""
 print(staged_df["Timestamp and Date"][1])
 print(staged_df["Timestamp and Date"][2])
 
@@ -76,3 +79,9 @@ def count_pickers(picker):
     return counter-1
 
 print(count_pickers(staged_df["Pickers"][100]))
+"""
+
+x = int(1)   # x will be 1
+y = int(2.8) # y will be 2
+z = int("6099") # z will be 3
+print("x is %s" %z)

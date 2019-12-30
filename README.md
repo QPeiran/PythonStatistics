@@ -2,7 +2,7 @@
 
 My Production Data Process Steps:
 
-1.StagedRaw.py: Prepare the timestampe data
+1.StagedRaw.py: Prepare the timestamp data
 
 Step 1-1: Read raw data in Excel format, then combine 8 kitting line's data into 1 giant sheet;
 (Notes: the kitting line's name is not included in raw data, it's traced by tab's name. Therefore, I add a new column with the kitting line's name)
@@ -41,7 +41,7 @@ Step 2-6: give each event an ID
 Step 2-7: loop out the final data for analysis as "prepared data"
 
 Key Points:
-#using outer/full join to perserve at much raw data as possible (concat)
+#using outer/full join to perserve as much raw data as possible (concat)
 
 #pd.Timestamp("timestamp aliked data") => return a "timestamp"
 
