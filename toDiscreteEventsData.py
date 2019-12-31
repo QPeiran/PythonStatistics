@@ -76,7 +76,7 @@ def main(df_temp_raw):
         df_temp_event['Break Reasons'].loc[index_align+i+1] = df_temp_raw['Break Reasons'].loc[index_align+i]
         df_temp_event['Missing Ingredients'].loc[index_align+i+1] = df_temp_raw['Missing Products'].loc[index_align+i]
         df_temp_event['Kitting Line'].loc[index_align+i+1] = df_temp_raw['Kitting Line'].loc[index_align+i]
-        df_temp_event['Assembly Batch'].loc[index_align+i+1] = batchcode_dependency(df_temp_raw['Production Batch'].loc[index_align+i])
+        df_temp_event['Assembly Batch'].loc[index_align+i] = batchcode_dependency(df_temp_raw['Production Batch'].loc[index_align+i])
         df_temp_event['Time Consumption'].loc[index_align+i] = time_consumption(df_temp_event['Start Time'].loc[index_align+i], df_temp_event['Finish Time'].loc[index_align+i])
         df_temp_event['Event Shift'].loc[index_align+i] = categorize_event_shift(df_temp_event['Finish Time'].loc[index_align+i])
         df_temp_event['Team Leader'].loc[index_align+i] = df_temp_raw['Team Leader'].loc[index_align+i]
