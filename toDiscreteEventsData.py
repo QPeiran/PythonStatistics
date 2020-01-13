@@ -104,4 +104,4 @@ for kl in range(1,9):
     df_final = pd.concat([df_final, seg], sort = False)
     print("Kitting Line %r Completed!" %(kl))
 
-df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared.csv') # Can change file path here
+df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared.csv', index = False) # Can change file path here
