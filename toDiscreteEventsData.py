@@ -66,7 +66,7 @@ def main(df_temp_raw):
     index_align = df_temp_raw.first_valid_index() # pandas is using the df_temp_raw's frame index whenever df_temp_raw is called
     df_temp_event['Finish Time'] = df_temp_raw['Timestamp and Date']
     df_temp_event['Seq Code'] = df_temp_raw['Seq Code']
-    df_temp_event['Start Time'][index_align] = '2019-1-1 00:00:00'
+    df_temp_event['Start Time'].loc[index_align] = '2019-1-1 00:00:00'
     #df_temp_event['Recipe Name'][1] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
     #print(df_temp_event)
     
@@ -87,9 +87,12 @@ def main(df_temp_raw):
             print(df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):])
             reversed_index = df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):].first_valid_index()
         """
-        df_temp_raw['Recipe and P'][index_align] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
+        #df_temp_raw['Recipe and P'][index_align] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
+        VI = df_temp_raw['Recipe and P'].first_valid_index()
+        df_temp_raw['Recipe and P'].loc[index_align] = df_temp_raw['Recipe and P'].loc[VI]
+        #print(VI)
         recipe_index = df_temp_raw['Recipe and P'].loc[0:index_align+i].last_valid_index()
-        #print(recipe_index)
+        print(recipe_index)
         df_temp_event['Recipe Name'].loc[index_align+i] = df_temp_raw['Recipe and P'].loc[recipe_index]
         #print(df_temp_raw['Recipe and P'].loc[recipe_index])
     #print(df_temp_event)
@@ -101,6 +104,6 @@ for kl in range(1,9):
     seg = main(df_temp_raw)
     #print(seg)
     df_final = pd.concat([df_final, seg], sort = False)
+    print("Kitting Line %r Completed!" %(kl))
 
 df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared.csv') # Can change file path here
-print("Completed!")
