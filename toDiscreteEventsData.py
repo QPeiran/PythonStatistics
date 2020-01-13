@@ -69,9 +69,7 @@ def main(df_temp_raw):
     df_temp_event['Start Time'].loc[index_align] = '2019-1-1 00:00:00'
     #df_temp_event['Recipe Name'][1] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
     #print(df_temp_event)
-    VI = df_temp_raw['Recipe and P'].first_valid_index()
-    df_temp_raw['Recipe and P'].loc[index_align] = df_temp_raw['Recipe and P'].loc[VI]
-    print(VI)
+    df_temp_raw.loc[index_align, 'Recipe and P'] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()] #ignore the waring -- data type is not changing, the return is in VIEW
 
     for i in range (len(df_temp_raw)):
         df_temp_event['Start Time'].loc[index_align+i+1] = df_temp_raw['Timestamp and Date'].loc[index_align+i]
