@@ -69,7 +69,10 @@ def main(df_temp_raw):
     df_temp_event['Start Time'].loc[index_align] = '2019-1-1 00:00:00'
     #df_temp_event['Recipe Name'][1] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
     #print(df_temp_event)
-    
+    VI = df_temp_raw['Recipe and P'].first_valid_index()
+    df_temp_raw['Recipe and P'].loc[index_align] = df_temp_raw['Recipe and P'].loc[VI]
+    print(VI)
+
     for i in range (len(df_temp_raw)):
         df_temp_event['Start Time'].loc[index_align+i+1] = df_temp_raw['Timestamp and Date'].loc[index_align+i]
         df_temp_event['Activity'].loc[index_align+i] = activity_dependency(df_temp_raw['Barcode'].loc[index_align+i])
@@ -88,11 +91,8 @@ def main(df_temp_raw):
             reversed_index = df_temp_raw['Recipe and P'][::-1].loc[(index_align + j):].first_valid_index()
         """
         #df_temp_raw['Recipe and P'][index_align] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
-        VI = df_temp_raw['Recipe and P'].first_valid_index()
-        df_temp_raw['Recipe and P'].loc[index_align] = df_temp_raw['Recipe and P'].loc[VI]
-        #print(VI)
         recipe_index = df_temp_raw['Recipe and P'].loc[0:index_align+i].last_valid_index()
-        print(recipe_index)
+        #print(recipe_index)
         df_temp_event['Recipe Name'].loc[index_align+i] = df_temp_raw['Recipe and P'].loc[recipe_index]
         #print(df_temp_raw['Recipe and P'].loc[recipe_index])
     #print(df_temp_event)
