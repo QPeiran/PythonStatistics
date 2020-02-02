@@ -14,7 +14,7 @@ Finally, export in CSV as "raw data staging file"
 
 
 
-2.toDiscreteEventData.py:
+2.toDiscreteEventData.py: Transfer the Time stamp data to event data
 Transform timestamp data to event data, the new data frame should be:
 ['Event_id', 'Start Time', 'Finish Time', 'Activity', 'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption']
 

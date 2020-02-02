@@ -13,6 +13,8 @@ with pd.ExcelFile(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\raw.xls
     data['KL6'] = pd.read_excel(xlsx,'Kit line 6',index_col = None,na_values='NA')
     data['KL7'] = pd.read_excel(xlsx,'Kit line 7',index_col = None,na_values='NA')
     data['KL8'] = pd.read_excel(xlsx,'Kit line 8',index_col = None,na_values='NA')
+    data['KL9'] = pd.read_excel(xlsx,'Kit line 9',index_col = None,na_values='NA')
+    data['KL10'] = pd.read_excel(xlsx,'Kit line 10',index_col = None,na_values='NA')
 
 # Join 8 kitting lines' data to one
 df = pd.DataFrame(data=None)   # df is the frame containing all raw data
@@ -26,7 +28,7 @@ for KL in data:
 # rename all the column index
 df.columns = ['Barcode', 'Production Batch', 'Recipe and P', 'Timestamp', 'Date', 'Seq Code', 'Week', 'Team Leader', 'Replenisher', 'Pickers', 'Break Reasons', 'Missing Products', 'Kitting Line']
 
-# Combine Timrstamp amd Date together as a new column
+# Combine Timestamp amd Date together as a new column
 new_c = df['Date'].astype(str).map(str)+ " " + df['Timestamp'].astype(str)
 df['Timestamp and Date'] = new_c
 #print(df['Timestamp and Date'])

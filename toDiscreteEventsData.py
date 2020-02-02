@@ -96,7 +96,7 @@ def main(df_temp_raw):
     #print(df_temp_event)
     return df_temp_event
 
-for kl in range(1,9):
+for kl in range(1,11):
     df_temp_raw = staged_df.loc[staged_df['Kitting Line'] == 'KL%s'%kl]
     #print(df_temp_raw)
     seg = main(df_temp_raw)
