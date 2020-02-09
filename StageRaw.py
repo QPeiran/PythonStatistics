@@ -15,6 +15,16 @@ with pd.ExcelFile(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\raw.xls
     data['KL8'] = pd.read_excel(xlsx,'Kit line 8',index_col = None,na_values='NA')
     data['KL9'] = pd.read_excel(xlsx,'Kit line 9',index_col = None,na_values='NA')
     data['KL10'] = pd.read_excel(xlsx,'Kit line 10',index_col = None,na_values='NA')
+    data['KL11'] = pd.read_excel(xlsx,'Kit line 11',index_col = None,na_values='NA')
+    data['KL12'] = pd.read_excel(xlsx,'Kit line 12',index_col = None,na_values='NA')
+    data['KL13'] = pd.read_excel(xlsx,'Kit line 13',index_col = None,na_values='NA')
+    data['KL14'] = pd.read_excel(xlsx,'Kit line 14',index_col = None,na_values='NA')
+    data['KL15'] = pd.read_excel(xlsx,'Kit line 15',index_col = None,na_values='NA')
+    data['KL16'] = pd.read_excel(xlsx,'Kit line 16',index_col = None,na_values='NA')
+    data['KL17'] = pd.read_excel(xlsx,'Kit line 17',index_col = None,na_values='NA')
+    data['KL18'] = pd.read_excel(xlsx,'Kit line 18',index_col = None,na_values='NA')
+    data['KL19'] = pd.read_excel(xlsx,'Kit line 19',index_col = None,na_values='NA')
+    data['KL20'] = pd.read_excel(xlsx,'Kit line 20',index_col = None,na_values='NA')
 
 # Join 8 kitting lines' data to one
 df = pd.DataFrame(data=None)   # df is the frame containing all raw data

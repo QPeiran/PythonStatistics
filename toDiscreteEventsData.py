@@ -96,12 +96,15 @@ def main(df_temp_raw):
     #print(df_temp_event)
     return df_temp_event
 
-for kl in range(1,11):
+for kl in range(1,21):
     df_temp_raw = staged_df.loc[staged_df['Kitting Line'] == 'KL%s'%kl]
+    if df_temp_raw.empty:
+        print("Kitting Line %r is not included!" %(kl))  # if data frame is empty
     #print(df_temp_raw)
-    seg = main(df_temp_raw)
-    #print(seg)
-    df_final = pd.concat([df_final, seg], sort = False)
-    print("Kitting Line %r Completed!" %(kl))
+    else:
+        seg = main(df_temp_raw)
+        #print(seg)
+        df_final = pd.concat([df_final, seg], sort = False)
+        print("Kitting Line %r Completed!" %(kl))
 
 df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared.csv', index = False) # Can change file path here
