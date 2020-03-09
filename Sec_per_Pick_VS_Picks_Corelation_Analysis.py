@@ -45,4 +45,4 @@ for key in DataFrameDict.keys():
     DF_by_picks =  pd.concat([DF_by_picks, DataFrameDict[key]], axis = 1, join='outer')
 #print(DF_by_picks)
 
-DF_by_picks.plot.box(grid = 'True')
+DF_by_picks.plot.box()
