@@ -1,5 +1,6 @@
 import pandas as pd
 import datetime as dt
+import re as re
 
 def activity_dependency(barcode):
     switcher = {
@@ -50,11 +51,12 @@ def time_consumption(timestamp1,timestamp2):
     return InMin
 
 def count_pickers(picker):
-    picker_array = picker.split(';')
+    pattern = re.compile(r';|_|,')  ## <- temporary solutions overhere, may change according to the labels printed
+    picker_array = pattern.findall(picker)  ## 
     counter = 0
     for members in picker_array:
         counter = counter + 1
-    return counter - 1
+    return counter
 
 staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv')  # Can change file path here
 #print(dataFrame['Team Leader'].describe())
