@@ -1,5 +1,7 @@
 import pandas as pd
 import datetime as dt
+import numpy as np
+from math import *
 #data = pd.read_excel (r'C:\Users\Peiran Quan\Desktop\W51.xlsx') 
 #print(data)
 """
@@ -81,8 +83,62 @@ def count_pickers(picker):
 print(count_pickers(staged_df["Pickers"][100]))
 """
 
-x = int(1)   # x will be 1
-y = int(2.8) # y will be 2
-z = int("6099") # z will be 3
-print("x is {}".format(x))
+# x = int(1)   # x will be 1
+# y = int(2.8) # y will be 2
+# z = int("6099") # z will be 3
+# print("x is {}".format(x))
 
+# rolls = np.random.randint(low=1, high=6, size=10)
+# print(rolls+10)
+# print(rolls <= 3)
+# xlist = [[1,2,3],[2,4,6],]
+# x = np.asarray(xlist)
+# print(x[1,-1])
+#print("x =\n{}".format(x))
+# x=[[1,2,3],[2,4,6],[1]]
+# x1 = [1]
+# if x.__contains__(x1):
+#     print(True)
+# else:
+#     print(False)
+
+# #help(list.__contains__)
+def testA(value, count):
+    if value > 21 and count > 0:
+        value = value - 10
+        count = count - 1
+        return testA(value, count)
+    else:
+        return value
+
+
+def blackjack_hand_greater_than(hand_1, hand_2):
+
+    dict_value = {"A":11, "2": 2, "3": 3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K": 10}
+    hand1_value = 0
+    hand2_value = 0
+    countA_1 = 0
+    countA_2 = 0
+
+    for i in range(len(hand_1)):
+        hand1_value = hand1_value + dict_value[hand_1[i]]
+        if hand_1[i] == "A":
+            countA_1 = countA_1 + 1
+    hand1_value = testA(hand1_value, countA_1)
+
+    for j in range(len(hand_2)):
+        hand2_value = hand2_value + dict_value[hand_2[j]]
+        if hand_2[j] == "A":
+            countA_2 = countA_2 + 1
+    hand2_value = testA(hand2_value, countA_2)
+
+    print(hand1_value, '\n',  hand2_value)
+    if ((hand1_value  <= hand2_value) and hand2_value <= 21) or (hand1_value > 21):
+        return False
+    else:
+        return True
+
+
+print(blackjack_hand_greater_than(['10', '7'], ['8', '3', 'A', '5']))        
+# Check your answer
+#q3.check()
