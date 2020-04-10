@@ -48,7 +48,7 @@ def time_consumption(timestamp1,timestamp2):
     t1 = pd.to_datetime(timestamp1)
     t2 = pd.to_datetime(timestamp2)
     InMin = pd.Timedelta(t2-t1).seconds/60.0
-    return InMin
+    return format(InMin, '.2f')
 
 def count_pickers(picker):
     pattern = re.compile(r';|_|,')  ## <- temporary solutions overhere, may change according to the labels printed
