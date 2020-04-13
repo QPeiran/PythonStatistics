@@ -26,7 +26,7 @@ with pd.ExcelFile(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\raw.xls
     data['KL19'] = pd.read_excel(xlsx,'Kit line 19',index_col = None,na_values='NA')
     data['KL20'] = pd.read_excel(xlsx,'Kit line 20',index_col = None,na_values='NA')
 
-# Join 8 kitting lines' data to one
+# Join all kitting lines' data to one
 df = pd.DataFrame(data=None)   # df is the frame containing all raw data
 for KL in data:
     sLength = len(data[KL])
@@ -59,9 +59,9 @@ df = df.drop_duplicates(subset = None, keep='last') # kept 'last record' for a r
 # df1 = df.where(df['Kitting Line'] == 'KL1') // another option
 for KL in data:
     df_new = df.loc[df['Kitting Line'] == KL] # df_new is the sliced raw data of "Kitting Line(KL) Name"
-    # 1.(after dropping duplicates) for every kitting line it has to contain batch code [1:4]
+    # 1.(after dropping duplicates) for every kitting line it has to contain batch code [1:5]
     i = pd.Categorical(df_new['Production Batch'])
-    for j in range (1,5):
+    for j in range (1,6):
         if j not in i.categories:
             print("Warning: %r , production batch %s is not included" %(KL,j))
         else:
