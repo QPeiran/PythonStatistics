@@ -4,7 +4,7 @@ My Production Data Process Steps:
 
 1.StagedRaw.py: Prepare the timestamp data
 
-Step 1-1: Read raw data in Excel format, then combine 8 kitting line's data into 1 giant sheet;
+Step 1-1: Read raw data in Excel format, then combine 20 kitting line's data into 1 giant sheet;
 (Notes: the kitting line's name is not included in raw data, it's traced by tab's name. Therefore, I add a new column with the kitting line's name)
 
 Step 1-2: detect any missing data & remove any duplicate data;
