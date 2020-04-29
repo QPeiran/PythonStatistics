@@ -33,7 +33,7 @@ for KL in data:
     KL_array = [KL for i in range(sLength)]
     data[KL]['kittingline'] = KL_array               #Meanwhile add a new column with the kitting line's name
     df = pd.concat([df,data[KL]], sort = False)
-    #print(df)
+    print(df) # validate data tyte by each KL's data
 
 # rename all the column index
 df.columns = ['Barcode', 'Production Batch', 'Recipe and P', 'Timestamp', 'Date', 'Seq Code', 'Week', 'Team Leader', 'Replenisher', 'Pickers', 'Break Reasons', 'Missing Products', 'Kitting Line']
