@@ -61,7 +61,7 @@ class mydeco(object):
 
 
 @mydeco 
-def my_func(hello):
-    print(hello)
+def my_func(hello, world):
+    print(hello, world)
 
-my_func(100)
+my_func('Hello', 'World')

@@ -159,33 +159,55 @@ print(count_pickers(staged_df["Pickers"][100]))
 #     return a
 
 # Solution 3
-def catche(f):
-    memo = {}
+# def catche(f):
+#     memo = {}
     
-    def helper(x):
-        if x not in memo:
-            memo[x] = f(x)
-            print(memo)
+#     def helper(x):
+#         if x not in memo:
+#             memo[x] = f(x)
+#             print(memo)
+#             print(x)
+#         return memo[x]
+
+#     return helper
+
+class catche(object):
+    def __init__(self, f):
+        super().__init__()
+        self.method = f
+        self.memo = {}
+    def __call__(self, x):
+        if x not in self.memo:
+            self.memo[x] = self.method(x)
+            print(self.memo)
             print(x)
-        return memo[x]
-
-    return helper
-
+        return self.memo[x]
+        
 
 
-def timeit(method):
-    def timed(*args, **kw):
+# def timeit(method):
+#     def timed(*args, **kw):
+#         ts = time.time()
+#         result = method(*args, **kw)
+#         te = time.time()
+#         print ('%r  %2.2f ms' % (method.__name__, (te - ts) * 1000))
+#         return result
+#     return timed
+
+
+class timeit(object):
+    def __init__(self, method):
+        super().__init__()
+        self.method = method
+    def __call__(self, *arg, **kwg):
         ts = time.time()
-        result = method(*args, **kw)
+        result = self.method(*arg, **kwg)
         te = time.time()
-        print ('%r  %2.2f ms' % (method.__name__, (te - ts) * 1000))
+        print ('%r  %2.2f ms' % (self.method.__name__, (te - ts) * 1000))
         return result
-    return timed
 
-
-
-@timeit
 @catche
+@timeit
 def fibR(n):
     if n == 1 or n == 2:
         return 1
