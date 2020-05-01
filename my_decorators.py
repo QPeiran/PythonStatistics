@@ -46,7 +46,7 @@
 #     print(hi)
 
 # my_func2('Hi')
-
+from functools import wraps
 
 class mydeco(object):
     def __init__(self, outter_func):
@@ -55,13 +55,23 @@ class mydeco(object):
 
     def __call__(self, *arg, **kwg):
         print(arg[0])
-        wrap = self.mimic_func(*arg, **kwg)
         print('__call__ {}'.format(self.mimic_func.__name__))
+        self.printting()
+        wrap = self.mimic_func(*arg, **kwg)
 
 
+    def printting(self):
+        print("what" + "ok?")
 
-@mydeco 
+class new_mydeco(mydeco):
+    def __init__(self, outter_func):
+        super().__init__(outter_func)
+    def printting(self):
+        print('good')
+        return super().printting()
+
+@new_mydeco 
 def my_func(hello, world):
-    print(hello, world)
+    print(hello,world)
 
-my_func('Hello', 'World')
+my_func('Hello', 'World1')
