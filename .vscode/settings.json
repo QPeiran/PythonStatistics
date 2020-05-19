@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "D:\\Anaconda\\envs\\myenv\\python.exe",
+    "python.pythonPath": "D:\\Anaconda\\python.exe",
     "azureFunctions.deploySubpath": "AHttpTrigger",
     "azureFunctions.scmDoBuildDuringDeployment": true,
     "azureFunctions.pythonVenv": ".venv",
