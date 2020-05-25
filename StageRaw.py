@@ -39,7 +39,7 @@ for KL in data:
 df.columns = ['Barcode', 'Production Batch', 'Recipe and P', 'Timestamp', 'Date', 'Seq Code', 'Week', 'Team Leader', 'Replenisher', 'Pickers', 'Break Reasons', 'Missing Products', 'Kitting Line']
 
 # Combine Timestamp amd Date together as a new column
-new_c = df['Date'].astype(str).map(str)+ " " + df['Timestamp'].astype(str)
+new_c = df['Date'].astype(str).map(str)+ " " + df['Timestamp'].astype(str)  ## <- as timestamp
 df['Timestamp and Date'] = new_c
 #print(df['Timestamp and Date'])
 #print(dt.datetime.combine(dt.datetime.date(df_new.iloc[3,4]),df_new.iloc[3,3]))
