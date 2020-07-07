@@ -1,3 +1,6 @@
+# To add a new cell, type '# %%'
+# To add a new markdown cell, type '# %% [markdown]'
+# %%
 import pandas as pd
 import datetime as dt
 
@@ -33,34 +36,63 @@ for KL in data:
     KL_array = [KL for i in range(sLength)]
     data[KL]['kittingline'] = KL_array               #Meanwhile add a new column with the kitting line's name
     df = pd.concat([df,data[KL]], sort = False)
-    # print(df) # validate data tyte by each KL's data
 
+
+# %%
 # rename all the column index
 df.columns = ['Barcode', 'Production Batch', 'Recipe and P', 'Timestamp', 'Date', 'Seq Code', 'Week', 'Team Leader', 'Replenisher', 'Pickers', 'Break Reasons', 'Missing Products', 'Kitting Line']
 
-# Combine Timestamp amd Date together as a new column
-new_c = df['Date'].astype(str).map(str)+ " " + df['Timestamp'].astype(str)  ## <- as timestamp
-t_new_c = pd.Timestamp(new_c)
-# print(t_new_c.head(10))
-# print(t_new_c.dtype)
 
-df['Timestamp and Date'] = t_new_c
-#print(df['Timestamp and Date'])
-#print(dt.datetime.combine(dt.datetime.date(df_new.iloc[3,4]),df_new.iloc[3,3]))
-"""
-# find duplicate rows
-dup = df.duplicated() # return a Boolean series with "True" at the place of each duplicated rows except their first occurrence (default value of keep argument is ‘first’). Then pass this Boolean Series to [] operator of Dataframe to select the rows which are duplicate
-print(dup) 
+# %%
+df.head(10)
 
-dup = df[df.duplicated()]
-print(dup) # show duplicated tuples
-"""
-# delete duplicates
+
+# %%
+# type(df['Timestamp'].iloc[1]) == dt.time
+type(df['Date'].iloc[0]) not in [pd._libs.tslibs.timestamps.Timestamp, 1]
+
+
+# %%
+# Check timestamps & date whether have the right format
+def check_data_type(dataframe, col):
+    for i in range(len(dataframe)):
+        if type(dataframe[col].iloc[i]) not in [dt.time, pd._libs.tslibs.timestamps.Timestamp] :
+            print("check the {}th data".format(i))
+        else:
+            pass
+
+
+# %%
+check_data_type(df, 'Timestamp')
+
+
+# %%
+check_data_type(df, 'Date')
+
+
+# %%
+def combine_date_time(df, datecol, timecol):
+    return df.apply(lambda row: row[datecol].replace(
+                                hour=row[timecol].hour,
+                                minute=row[timecol].minute,
+                                second=row[timecol].second),
+                    axis=1)
+
+
+# %%
+new_c = combine_date_time(df, 'Date', 'Timestamp')
+new_c
+
+
+# %%
+df['Timestamp and Date'] = new_c
+
+
+# %%
 df = df.drop_duplicates(subset = None, keep='last') # kept 'last record' for a reason
 
-# detect missing data
 
-# df1 = df.where(df['Kitting Line'] == 'KL1') // another option
+# %%
 for KL in data:
     df_new = df.loc[df['Kitting Line'] == KL] # df_new is the sliced raw data of "Kitting Line(KL) Name"
     # 1.(after dropping duplicates) for every kitting line it has to contain batch code [1:5]
@@ -70,8 +102,12 @@ for KL in data:
             print("Warning: %r , production batch %s is not included" %(KL,j))
         else:
             print("%r production batch %s included" %(KL,j))
-    # 2.Slice the raw data by Kitting Line Name, then the tuple's squence must follow the tiem sequence. Find out the errors
-    #for k in range(len(df_new)):
 
-#print to CSV
-df.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv',index=False) #Can change the file path here
+
+# %%
+df.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv',index=False)
+
+
+# %%
+conda -V
+
