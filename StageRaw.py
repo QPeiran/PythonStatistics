@@ -109,5 +109,5 @@ df.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv',ind
 
 
 # %%
-conda -V
+# conda -V
 

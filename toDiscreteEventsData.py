@@ -1,6 +1,13 @@
+# To add a new cell, type '# %%'
+# To add a new markdown cell, type '# %% [markdown]'
+# %%
 import pandas as pd
 import datetime as dt
 import re as re
+
+
+# %%
+#the event is depending on the barcode scanned afterwoards
 
 def activity_dependency(barcode):
     switcher = {
@@ -10,6 +17,10 @@ def activity_dependency(barcode):
         'Production Finish': 'TBD'
     }
     return switcher.get(barcode, 'Production')
+
+
+# %%
+# 7 days of Assembly
 
 def batchcode_dependency(batchcoded):
     switcher = {
@@ -22,6 +33,12 @@ def batchcode_dependency(batchcoded):
         7: 'Thursday Assembly'
     }
     return switcher.get(batchcoded, '')
+
+
+# %%
+# morning shift -- 5:00 to 14:00
+# afternoon shift -- 14:00 to 23:00
+# Error -- Events compeleted in other time periods
 
 def categorize_event_shift(timestamp):
     weekday_index = pd.Timestamp(timestamp).weekday()
@@ -36,19 +53,27 @@ def categorize_event_shift(timestamp):
     }
     weekday = switcher.get(weekday_index,'')
     hour = pd.Timestamp(timestamp).hour
-    if hour in range(6,13):
+    if hour in range(5,14):
         shift = 'Morning'
-    elif hour in range(13,22):
+    elif hour in range(14,23):
         shift = 'Afternoon'
     else:
         shift = 'Error'
     return weekday +' '+ shift
+
+
+# %%
+#calculting time cost to sec
 
 def time_consumption(timestamp1,timestamp2):
     t1 = pd.to_datetime(timestamp1)
     t2 = pd.to_datetime(timestamp2)
     InMin = pd.Timedelta(t2-t1).seconds/60.0
     return format(InMin, '.2f')
+
+
+# %%
+# count how many pickers for ever events (+2 to get the total amount of people on this kitting line)
 
 def count_pickers(picker):
     pattern = re.compile(r';|_|,')  ## <- temporary solutions overhere, may change according to the labels printed
@@ -58,11 +83,19 @@ def count_pickers(picker):
         counter = counter + 1
     return counter
 
+
+# %%
 staged_df = pd.read_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\staged.csv')  # Can change file path here
-#print(dataFrame['Team Leader'].describe())
+staged_df['Team Leader'].describe()
+
+
+# %%
+# copy raw df
+
 df_final = pd.DataFrame(data=None) #df is the event data frame
 
 
+# %%
 def main(df_temp_raw):
     df_temp_event = pd.DataFrame(columns=('Start Time', 'Finish Time', 'Activity', 'Seq Code' ,'Recipe Name', 'Break Reasons', 'Missing Ingredients', 'Kitting Line', 'Assembly Batch', 'Event Shift', 'Team Leader', 'Pickers Count', 'Time Consumption'))
     index_align = df_temp_raw.first_valid_index() # pandas is using the df_temp_raw's frame index whenever df_temp_raw is called
@@ -98,6 +131,9 @@ def main(df_temp_raw):
     #print(df_temp_event)
     return df_temp_event
 
+
+# %%
+
 for kl in range(1,21):
     df_temp_raw = staged_df.loc[staged_df['Kitting Line'] == 'KL%s'%kl]
     if df_temp_raw.empty:
@@ -109,4 +145,17 @@ for kl in range(1,21):
         df_final = pd.concat([df_final, seg], sort = False)
         print("Kitting Line %r Completed!" %(kl))
 
+
+# %%
+df_final['Week'] = '2020-28'
+df_final
+
+
+# %%
 df_final.to_csv(r'C:\Users\Peiran Quan\Desktop\python_data_preparation\prepared.csv', index = False) # Can change file path here
+
+
+# %%
+
+
+
