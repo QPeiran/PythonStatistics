@@ -36,7 +36,7 @@ for KL in data:
     KL_array = [KL for i in range(sLength)]
     data[KL]['kittingline'] = KL_array               #Meanwhile add a new column with the kitting line's name
     df = pd.concat([df,data[KL]], sort = False)
-
+    
 
 # %%
 # rename all the column index

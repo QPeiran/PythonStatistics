@@ -96,7 +96,7 @@ def main(df_temp_raw):
     index_align = df_temp_raw.first_valid_index() # pandas is using the df_temp_raw's frame index whenever df_temp_raw is called
     df_temp_event['Finish Time'] = df_temp_raw['Timestamp and Date']
     df_temp_event['Seq Code'] = df_temp_raw['Seq Code']
-    df_temp_event['Start Time'].loc[index_align] = '2019-1-1 00:00:00'
+    df_temp_event['Start Time'].loc[index_align] = '2020-1-1 00:00:00'
     #df_temp_event['Recipe Name'][1] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()]
     #print(df_temp_event)
     df_temp_raw.loc[index_align, 'Recipe and P'] = df_temp_raw['Recipe and P'].loc[df_temp_raw['Recipe and P'].first_valid_index()] #ignore the waring -- data type is not changing, the return is in VIEW
@@ -142,7 +142,7 @@ for kl in range(1,21):
 
 
 # %%
-df_final['Week'] = '2020-28'
+df_final['Week'] = '2020-40'
 df_final
 
 
