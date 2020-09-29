@@ -46,3 +46,9 @@ Key Points:
 #pd.Timestamp("timestamp aliked data") => return a "timestamp"
 
 #pd.Timedelta(t2-t1) => return the time difference between t1 and t2
+
+
+
+
+# Beware to use the "pipenv" -- PythonStatistics for jupyther kernel
+# Downgrade VSCode Python (AT LEAST version 2020.9.111407 is broken) 

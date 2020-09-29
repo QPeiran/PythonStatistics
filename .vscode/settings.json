@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\tools\\python.exe",
+    "python.pythonPath": "C:\\Users\\Peiran Quan\\.virtualenvs\\PythonStatistics-iXc94wyw\\Scripts\\python.exe",
     "azureFunctions.deploySubpath": "AHttpTrigger",
     "azureFunctions.scmDoBuildDuringDeployment": true,
     "azureFunctions.pythonVenv": ".venv",
